@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #tip{
+        color:red;
+    }
+</style>
+<body>
+    请求方法：
+    <select id="method">
+        <option>get</option>
+        <option>put</option>
+        <option>post</option>
+        <option>delete</option>
+    </select>
+    <br>
+    输入跨域地址：<input type="text" id="url"><br>
+    <button id="reqBtn">请求</button><br>
+    <span id="tip"></span><br>
+    请求结果：
+
+    <textarea id="result" rows="15" cols="200"></textarea>
+</body>
+<script src="./jquery-3.2.1.min.js"></script>
+<script>
+    document.querySelector("#reqBtn").addEventListener('click', e => {
+        let url = $("#url").val();
+        let method = $("#method").val();
+        $.ajax(url, {
+            type: method
+        }).then(res=>{
+            $("#result").val(JSON.stringify(res));
+            console.log(res);
+        }).fail(res=>{
+            $("#tip").text("出错了。请打开控制台查看错误信息")
+            $("#result").val(JSON.stringify(res));
+            console.log(res);
+        });
+    })
+</script>
+</html>
